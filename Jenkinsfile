@@ -5,7 +5,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                git clone 'https://github.com/thomas666-beast/hello-sh'
+                git branch: 'main', 
+                    url: 'https://github.com/thomas666-beast/hello-sh.git'
             }
         }
         
