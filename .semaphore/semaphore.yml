@@ -1,0 +1,25 @@
+version: v1.0
+name: CI Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+blocks:
+  - name: Run Script
+    task:
+      jobs:
+        - name: Execute bash script
+          commands:
+            - checkout
+            - chmod +x hello.sh
+            - ./hello.sh
+      epilogue:
+        on_pass:
+          commands:
+            - echo 'deployed' > deployed.txt
+            - echo "Script passed - deployment file created"
+        on_fail:
+          commands:
+            - echo "Script failed - deployment file not created"
+            - exit 1
