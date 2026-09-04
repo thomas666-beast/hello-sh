@@ -1,7 +1,25 @@
 pipeline {
     agent any
-    
+
+    parameters {
+        string(name: 'NAME', defaultValue: 'World', description: 'Who to greet?')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Environment')
+    }
+
     stages {
+        stage('Greeting') {
+            steps {
+                echo "Hello ${params.NAME}!"
+                echo "Environment: ${params.ENVIRONMENT}"
+            }
+        }
+        
+        stage('Environment Setup') {
+            steps {
+                sh "echo 'Setting up ${params.ENVIRONMENT} environment'"
+            }
+        }
+
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
