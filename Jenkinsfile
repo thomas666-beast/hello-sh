@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                git 'https://github.com/thomas666-beast/hello-sh'
+                git clone 'https://github.com/thomas666-beast/hello-sh'
             }
         }
         
